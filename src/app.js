@@ -1,9 +1,9 @@
-import express from 'express';
+const express = require('express');
+console.log('in the app');
 import authRouter from './auth/router.js';
 import notFound from './middleware/404.js';
 import error from './middleware/error.js';
 import uploadRouter from './routes/upload.js';
-
 
 const app = express();
 

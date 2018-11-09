@@ -6,7 +6,7 @@ import s3 from '../lib/s3.js';
 
 const uploadRouter = express.Router();
 
-const uploader = multer({ dest: `${__dirname}/tmp` });
+const uploader = multer({ dest: `${__dirname}/../../tmp` });
 
 uploadRouter.post('/upload', uploader.any(), (request, response) => {
   console.log('request.files', request.files);
