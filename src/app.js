@@ -1,5 +1,4 @@
-const express = require('express');
-console.log('in the app');
+import express from 'express';
 import authRouter from './auth/router.js';
 import notFound from './middleware/404.js';
 import error from './middleware/error.js';

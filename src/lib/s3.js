@@ -1,29 +1,31 @@
-//nitty gritty AWS stuff
-
 'use strict';
 
-import fs from 'fs-extra';
+import fse from 'fs-extra';
 import aws from 'aws-sdk';
 
 const s3 = new aws.S3();
 
-const uploadFile = (filepath, key) => {
-  let config = {
+const uploadFile = (filepath, key) => { 
+  let config = { 
     Bucket: process.env.AWS_BUCKET,
     Key: key,
     ACL: 'public-read',
-    Body: fs.createReadStream(filepath),
+    Body: fse.createReadStream(filepath),
   };
+  console.log('config', filepath);
+  console.log('config', config.Body);
 
   return s3.upload(config)
-    .promise()
-    .then(result => {
-      fs.remove(filepath)
+    .promise() 
+    .then(result => { 
+      console.log('result', result);
+      fse.remove(filepath) 
+
         .then(() => result.Location);
     })
     .catch(err => {
       console.error(err);
-      return fs.remove(filepath)
+      return fse.remove(filepath)
         .then(() => Promise.reject(err));
     });
 };
